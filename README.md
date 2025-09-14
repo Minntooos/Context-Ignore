@@ -21,7 +21,7 @@ A smart, context-aware extension for VS Code, Cursor, and other forks that radic
 - **Dynamic Context Menus**: Intelligently shows only relevant ignore options for your specific IDE, be it Cursor, Windsurf (Codeium), Qoder, or plain VS Code with extensions like Cline or Roo Code.
 - **Multi-Select Support**: Select multiple files and folders in the explorer and add, remove, or inverse-ignore them all in a single action.
 - **Inverse Ignore**: A powerful "ignore everything but this" feature. It adds `*` to the ignore file and then un-ignores your selection, creating an "allow list."
-- **Unified, Persistent Undo**: Any ignore operation (add, remove, or inverse-ignore) can be undone with a single command (`Ctrl+Alt+U`), even after reloading the editor.
+- **Unified, Persistent Undo**: Any ignore operation (add, remove, or inverse-ignore) can be undone with a single command (`Ctrl+Alt+U`), even after reloading the editor. This functionality does not apply to "Always Ignore" operations.
 - **File Watching**: Automatically detects when a supported ignore file (e.g., `.gitignore`) is created or deleted and updates the context menu in real-time.
 - **Always Ignore**: Permanently ignore files. Standard "remove" and "inverse ignore" operations will respect these entries, leaving them untouched.
 - **Remove Always Ignore**: A dedicated command to remove a permanently ignored entry, available from the context menu and with its own keybinding.
