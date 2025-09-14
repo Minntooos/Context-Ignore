@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Minntooos/Context-Ignore.git"
+    "url": "https://github.com/mahdidevlp/cursorignore-helper.git"
   },
   "engines": {
     "vscode": "^1.70.0"
@@ -74,14 +74,14 @@
       },
       {
         "command": "contextignore.addAlways.cursorignore",
-        "key": "ctrl+shift+win+alt+c",
-        "mac": "cmd+shift+cmd+alt+c",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
       },
       {
         "command": "contextignore.removeAlways.cursorignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
       },
       {
@@ -104,14 +104,14 @@
       },
       {
         "command": "contextignore.addAlways.clineignore",
-        "key": "ctrl+shift+win+alt+l",
-        "mac": "cmd+shift+cmd+alt+l",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
       },
       {
         "command": "contextignore.removeAlways.clineignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
       },
       {
@@ -134,14 +134,14 @@
       },
       {
         "command": "contextignore.addAlways.kilocodeignore",
-        "key": "ctrl+shift+win+alt+k",
-        "mac": "cmd+shift+cmd+alt+k",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
       },
       {
         "command": "contextignore.removeAlways.kilocodeignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
       },
       {
@@ -164,14 +164,14 @@
       },
       {
         "command": "contextignore.addAlways.codeiumignore",
-        "key": "ctrl+shift+win+alt+c",
-        "mac": "cmd+shift+cmd+alt+c",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
       },
       {
         "command": "contextignore.removeAlways.codeiumignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
       },
       {
@@ -194,14 +194,14 @@
       },
       {
         "command": "contextignore.addAlways.qoderignore",
-        "key": "ctrl+shift+win+alt+c",
-        "mac": "cmd+shift+cmd+alt+c",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
       },
       {
         "command": "contextignore.removeAlways.qoderignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
       },
       {
@@ -224,14 +224,14 @@
       },
       {
         "command": "contextignore.addAlways.rooignore",
-        "key": "ctrl+shift+win+alt+r",
-        "mac": "cmd+shift+cmd+alt+r",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
       },
       {
         "command": "contextignore.removeAlways.rooignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a",
         "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
       },
       {
@@ -254,14 +254,14 @@
       },
       {
         "command": "contextignore.addAlways.gitignore",
-        "key": "ctrl+shift+win+alt+g",
-        "mac": "cmd+shift+cmd+alt+g",
+        "key": "ctrl+alt+h",
+        "mac": "cmd+alt+h",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
       },
       {
         "command": "contextignore.removeAlways.gitignore",
-        "key": "ctrl+shift+win+alt+d",
-        "mac": "cmd+shift+cmd+alt+d",
+        "key": "ctrl+shift+alt+h",
+        "mac": "cmd+shift+alt+h",
         "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
       },
       {

@@ -40,8 +40,10 @@ A smart, context-aware extension for VS Code, Cursor, and other forks that radic
 The extension provides a consistent and conflict-free set of keybindings:
 *   **Add to Ignore**: `Ctrl+Alt+<key>` (e.g., `Ctrl+Alt+G` for `.gitignore`)
 *   **Remove from Ignore**: `Ctrl+Shift+Alt+<key>` (e.g., `Ctrl+Shift+Alt+G` for `.gitignore`)
-*   **Always Ignore**: `Ctrl+Shift+Win+Alt+<key>` (e.g., `Ctrl+Shift+Win+Alt+G` for `.gitignore`)
-*   **Remove Always Ignore**: `Ctrl+Shift+Win+Alt+D` (Global keybinding for all ignore files)
+*   **Always Ignore (Primary)**: `Ctrl+Alt+A`
+*   **Remove Always Ignore (Primary)**: `Ctrl+Shift+Alt+A`
+*   **Always Ignore (.gitignore)**: `Ctrl+Alt+H`
+*   **Remove Always Ignore (.gitignore)**: `Ctrl+Shift+Alt+H`
 *   **Inverse Ignore (Primary)**: `Ctrl+Alt+I` (For the main IDE or active extension like Cursor, Cline, etc.)
 *   **Inverse Ignore (.gitignore)**: `Ctrl+Alt+J` (Separate key to avoid conflicts)
 *   **Undo Last Ignore Operation**: `Ctrl+Alt+U`
