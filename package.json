@@ -1,0 +1,325 @@
+{
+  "name": "context-ignore",
+  "displayName": "Context Ignore",
+  "description": "Quickly add or remove multiple files/folders from the correct ignore file for your IDE (.cursorignore, .clineignore, etc.)",
+  "version": "1.0.1",
+  "publisher": "Aiso",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Minntooos/Context-Ignore.git"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "contextignore.add.cursorignore", "title": "Add to .cursorignore" },
+      { "command": "contextignore.remove.cursorignore", "title": "Remove from .cursorignore" },
+      { "command": "contextignore.inverse.cursorignore", "title": "Ignore all except this (in .cursorignore)" },
+      { "command": "contextignore.addAlways.cursorignore", "title": "Always Ignore in .cursorignore" },
+      { "command": "contextignore.removeAlways.cursorignore", "title": "Remove Always Ignore from .cursorignore" },
+      { "command": "contextignore.add.clineignore", "title": "Add to .clineignore" },
+      { "command": "contextignore.remove.clineignore", "title": "Remove from .clineignore" },
+      { "command": "contextignore.inverse.clineignore", "title": "Ignore all except this (in .clineignore)" },
+      { "command": "contextignore.addAlways.clineignore", "title": "Always Ignore in .clineignore" },
+      { "command": "contextignore.removeAlways.clineignore", "title": "Remove Always Ignore from .clineignore" },
+      { "command": "contextignore.add.kilocodeignore", "title": "Add to .kilocodeignore" },
+      { "command": "contextignore.remove.kilocodeignore", "title": "Remove from .kilocodeignore" },
+      { "command": "contextignore.inverse.kilocodeignore", "title": "Ignore all except this (in .kilocodeignore)" },
+      { "command": "contextignore.addAlways.kilocodeignore", "title": "Always Ignore in .kilocodeignore" },
+      { "command": "contextignore.removeAlways.kilocodeignore", "title": "Remove Always Ignore from .kilocodeignore" },
+      { "command": "contextignore.add.codeiumignore", "title": "Add to .codeiumignore" },
+      { "command": "contextignore.remove.codeiumignore", "title": "Remove from .codeiumignore" },
+      { "command": "contextignore.inverse.codeiumignore", "title": "Ignore all except this (in .codeiumignore)" },
+      { "command": "contextignore.addAlways.codeiumignore", "title": "Always Ignore in .codeiumignore" },
+      { "command": "contextignore.removeAlways.codeiumignore", "title": "Remove Always Ignore from .codeiumignore" },
+      { "command": "contextignore.add.qoderignore", "title": "Add to .qoderignore" },
+      { "command": "contextignore.remove.qoderignore", "title": "Remove from .qoderignore" },
+      { "command": "contextignore.inverse.qoderignore", "title": "Ignore all except this (in .qoderignore)" },
+      { "command": "contextignore.addAlways.qoderignore", "title": "Always Ignore in .qoderignore" },
+      { "command": "contextignore.removeAlways.qoderignore", "title": "Remove Always Ignore from .qoderignore" },
+      { "command": "contextignore.add.rooignore", "title": "Add to .rooignore" },
+      { "command": "contextignore.remove.rooignore", "title": "Remove from .rooignore" },
+      { "command": "contextignore.inverse.rooignore", "title": "Ignore all except this (in .rooignore)" },
+      { "command": "contextignore.addAlways.rooignore", "title": "Always Ignore in .rooignore" },
+      { "command": "contextignore.removeAlways.rooignore", "title": "Remove Always Ignore from .rooignore" },
+      { "command": "contextignore.add.gitignore", "title": "Add to .gitignore" },
+      { "command": "contextignore.remove.gitignore", "title": "Remove from .gitignore" },
+      { "command": "contextignore.inverse.gitignore", "title": "Ignore all except this (in .gitignore)" },
+      { "command": "contextignore.addAlways.gitignore", "title": "Always Ignore in .gitignore" },
+      { "command": "contextignore.removeAlways.gitignore", "title": "Remove Always Ignore from .gitignore" },
+      { "command": "contextignore.undo", "title": "Undo Last Ignore Operation" }
+    ],
+    "keybindings": [
+      {
+        "command": "contextignore.add.cursorignore",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
+      },
+      {
+        "command": "contextignore.remove.cursorignore",
+        "key": "ctrl+shift+alt+c",
+        "mac": "cmd+shift+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
+      },
+      {
+        "command": "contextignore.inverse.cursorignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
+      },
+      {
+        "command": "contextignore.addAlways.cursorignore",
+        "key": "ctrl+shift+win+alt+c",
+        "mac": "cmd+shift+cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
+      },
+      {
+        "command": "contextignore.removeAlways.cursorignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isCursor"
+      },
+      {
+        "command": "contextignore.add.clineignore",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
+      },
+      {
+        "command": "contextignore.remove.clineignore",
+        "key": "ctrl+shift+alt+l",
+        "mac": "cmd+shift+alt+l",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
+      },
+      {
+        "command": "contextignore.inverse.clineignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
+      },
+      {
+        "command": "contextignore.addAlways.clineignore",
+        "key": "ctrl+shift+win+alt+l",
+        "mac": "cmd+shift+cmd+alt+l",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
+      },
+      {
+        "command": "contextignore.removeAlways.clineignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasCline || contextignore.has.clineignore)"
+      },
+      {
+        "command": "contextignore.add.kilocodeignore",
+        "key": "ctrl+alt+k",
+        "mac": "cmd+alt+k",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
+      },
+      {
+        "command": "contextignore.remove.kilocodeignore",
+        "key": "ctrl+shift+alt+k",
+        "mac": "cmd+shift+alt+k",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
+      },
+      {
+        "command": "contextignore.inverse.kilocodeignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
+      },
+      {
+        "command": "contextignore.addAlways.kilocodeignore",
+        "key": "ctrl+shift+win+alt+k",
+        "mac": "cmd+shift+cmd+alt+k",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
+      },
+      {
+        "command": "contextignore.removeAlways.kilocodeignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasKilo || contextignore.has.kilocodeignore)"
+      },
+      {
+        "command": "contextignore.add.codeiumignore",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
+      },
+      {
+        "command": "contextignore.remove.codeiumignore",
+        "key": "ctrl+shift+alt+c",
+        "mac": "cmd+shift+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
+      },
+      {
+        "command": "contextignore.inverse.codeiumignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
+      },
+      {
+        "command": "contextignore.addAlways.codeiumignore",
+        "key": "ctrl+shift+win+alt+c",
+        "mac": "cmd+shift+cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
+      },
+      {
+        "command": "contextignore.removeAlways.codeiumignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isWindsurf"
+      },
+      {
+        "command": "contextignore.add.qoderignore",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
+      },
+      {
+        "command": "contextignore.remove.qoderignore",
+        "key": "ctrl+shift+alt+c",
+        "mac": "cmd+shift+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
+      },
+      {
+        "command": "contextignore.inverse.qoderignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
+      },
+      {
+        "command": "contextignore.addAlways.qoderignore",
+        "key": "ctrl+shift+win+alt+c",
+        "mac": "cmd+shift+cmd+alt+c",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
+      },
+      {
+        "command": "contextignore.removeAlways.qoderignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.ide.isQoder"
+      },
+      {
+        "command": "contextignore.add.rooignore",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
+      },
+      {
+        "command": "contextignore.remove.rooignore",
+        "key": "ctrl+shift+alt+r",
+        "mac": "cmd+shift+alt+r",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
+      },
+      {
+        "command": "contextignore.inverse.rooignore",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
+      },
+      {
+        "command": "contextignore.addAlways.rooignore",
+        "key": "ctrl+shift+win+alt+r",
+        "mac": "cmd+shift+cmd+alt+r",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
+      },
+      {
+        "command": "contextignore.removeAlways.rooignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && (contextignore.ext.hasRoo || contextignore.has.rooignore)"
+      },
+      {
+        "command": "contextignore.add.gitignore",
+        "key": "ctrl+alt+g",
+        "mac": "cmd+alt+g",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
+      },
+      {
+        "command": "contextignore.remove.gitignore",
+        "key": "ctrl+shift+alt+g",
+        "mac": "cmd+shift+alt+g",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
+      },
+      {
+        "command": "contextignore.inverse.gitignore",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
+      },
+      {
+        "command": "contextignore.addAlways.gitignore",
+        "key": "ctrl+shift+win+alt+g",
+        "mac": "cmd+shift+cmd+alt+g",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
+      },
+      {
+        "command": "contextignore.removeAlways.gitignore",
+        "key": "ctrl+shift+win+alt+d",
+        "mac": "cmd+shift+cmd+alt+d",
+        "when": "(editorTextFocus || filesExplorerFocus) && contextignore.has.gitignore"
+      },
+      {
+        "command": "contextignore.undo",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u",
+        "when": "contextignore.canUndo"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        { "command": "contextignore.add.cursorignore", "when": "contextignore.ide.isCursor || contextignore.has.cursorignore", "group": "navigation" },
+        { "command": "contextignore.remove.cursorignore", "when": "contextignore.ide.isCursor || contextignore.has.cursorignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.cursorignore", "when": "contextignore.ide.isCursor || contextignore.has.cursorignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.cursorignore", "when": "contextignore.ide.isCursor || contextignore.has.cursorignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.cursorignore", "when": "contextignore.ide.isCursor || contextignore.has.cursorignore", "group": "navigation@3" },
+        { "command": "contextignore.add.clineignore", "when": "contextignore.ext.hasCline || contextignore.has.clineignore", "group": "navigation" },
+        { "command": "contextignore.remove.clineignore", "when": "contextignore.ext.hasCline || contextignore.has.clineignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.clineignore", "when": "contextignore.ext.hasCline || contextignore.has.clineignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.clineignore", "when": "contextignore.ext.hasCline || contextignore.has.clineignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.clineignore", "when": "contextignore.ext.hasCline || contextignore.has.clineignore", "group": "navigation@3" },
+        { "command": "contextignore.add.kilocodeignore", "when": "contextignore.ext.hasKilo || contextignore.has.kilocodeignore", "group": "navigation" },
+        { "command": "contextignore.remove.kilocodeignore", "when": "contextignore.ext.hasKilo || contextignore.has.kilocodeignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.kilocodeignore", "when": "contextignore.ext.hasKilo || contextignore.has.kilocodeignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.kilocodeignore", "when": "contextignore.ext.hasKilo || contextignore.has.kilocodeignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.kilocodeignore", "when": "contextignore.ext.hasKilo || contextignore.has.kilocodeignore", "group": "navigation@3" },
+        { "command": "contextignore.add.codeiumignore", "when": "contextignore.has.codeiumignore", "group": "navigation" },
+        { "command": "contextignore.remove.codeiumignore", "when": "contextignore.has.codeiumignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.codeiumignore", "when": "contextignore.has.codeiumignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.codeiumignore", "when": "contextignore.has.codeiumignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.codeiumignore", "when": "contextignore.has.codeiumignore", "group": "navigation@3" },
+        { "command": "contextignore.add.qoderignore", "when": "contextignore.has.qoderignore", "group": "navigation" },
+        { "command": "contextignore.remove.qoderignore", "when": "contextignore.has.qoderignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.qoderignore", "when": "contextignore.has.qoderignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.qoderignore", "when": "contextignore.has.qoderignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.qoderignore", "when": "contextignore.has.qoderignore", "group": "navigation@3" },
+        { "command": "contextignore.add.rooignore", "when": "contextignore.ext.hasRoo || contextignore.has.rooignore", "group": "navigation" },
+        { "command": "contextignore.remove.rooignore", "when": "contextignore.ext.hasRoo || contextignore.has.rooignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.rooignore", "when": "contextignore.ext.hasRoo || contextignore.has.rooignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.rooignore", "when": "contextignore.ext.hasRoo || contextignore.has.rooignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.rooignore", "when": "contextignore.ext.hasRoo || contextignore.has.rooignore", "group": "navigation@3" },
+        { "command": "contextignore.add.gitignore", "when": "contextignore.has.gitignore", "group": "navigation" },
+        { "command": "contextignore.remove.gitignore", "when": "contextignore.has.gitignore", "group": "navigation" },
+        { "command": "contextignore.addAlways.gitignore", "when": "contextignore.has.gitignore", "group": "navigation@2" },
+        { "command": "contextignore.removeAlways.gitignore", "when": "contextignore.has.gitignore", "group": "navigation@2" },
+        { "command": "contextignore.inverse.gitignore", "when": "contextignore.has.gitignore", "group": "navigation@3" },
+        { "command": "contextignore.undo", "when": "contextignore.canUndo", "group": "navigation@4" }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/vscode": "^1.70.0",
+    "typescript": "^4.5.0"
+  }
+}
+
