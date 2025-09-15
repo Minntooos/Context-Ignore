@@ -4,6 +4,22 @@ import * as path from "path";
 import { IgnoreOperation } from "./state";
 import { ALWAYS_IGNORE_MARKER } from "./constants";
 
+function addUnignoreEntries(lines: string[], rel: string): void {
+    const parts = rel.endsWith("/") ? rel.slice(0, -1).split("/") : rel.split("/");
+    if (parts.length > 1) {
+        for (let i = 1; i < parts.length; i++) {
+            const parentPath = `!${parts.slice(0, i).join("/")}/`;
+            if (!lines.includes(parentPath)) {
+                lines.push(parentPath);
+            }
+        }
+    }
+    const selfPath = `!${rel}`;
+    if (!lines.includes(selfPath)) {
+        lines.push(selfPath);
+    }
+}
+
 function getRelativePath(root: string, fsPath: string): string {
     const relRaw = path.relative(root, fsPath);
     const rel = relRaw.replace(/\\/g, "/");
@@ -66,10 +82,7 @@ export function performIgnoreOperation(
             const rel = getRelativePath(root, uri.fsPath);
             if (remove) {
                 if (isInverse) {
-                    const unignoreEntry = `!${rel}`;
-                    if (!lines.some(l => l.trim() === unignoreEntry)) {
-                        lines.push(unignoreEntry);
-                    }
+                    addUnignoreEntries(lines, rel);
                 } else {
                     const indexToRemove = lines.findIndex(l => l.trim() === rel);
                     if (indexToRemove !== -1) {
@@ -130,23 +143,7 @@ export function performInverseIgnoreOperation(
         const lines: string[] = [...alwaysIgnoreBlocks, "*"];
         for (const uri of uris) {
             const rel = getRelativePath(root, uri.fsPath);
-
-            // Un-ignore all parent directories
-            const parts = rel.endsWith('/') ? rel.slice(0, -1).split('/') : rel.split('/');
-            if (parts.length > 1) {
-                for (let i = 1; i < parts.length; i++) {
-                    const parentPath = `!${parts.slice(0, i).join('/')}/`;
-                    if (!lines.includes(parentPath)) {
-                        lines.push(parentPath);
-                    }
-                }
-            }
-
-            // Un-ignore the file/dir itself
-            const selfPath = `!${rel}`;
-            if (!lines.includes(selfPath)) {
-                lines.push(selfPath);
-            }
+            addUnignoreEntries(lines, rel);
         }
         fs.writeFileSync(ignorePath, lines.join("\n") + "\n");
     }
