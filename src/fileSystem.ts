@@ -4,6 +4,19 @@ import * as path from "path";
 import { IgnoreOperation } from "./state";
 import { ALWAYS_IGNORE_MARKER } from "./constants";
 
+function getRelativePath(root: string, fsPath: string): string {
+    const relRaw = path.relative(root, fsPath);
+    const rel = relRaw.replace(/\\/g, "/");
+    try {
+        if (fs.statSync(fsPath).isDirectory()) {
+            return rel + "/";
+        }
+    } catch (e) {
+        // May fail if path refers to a file that does not exist.
+    }
+    return rel;
+}
+
 function getRootToUrisMap(uris: vscode.Uri[]): Map<string, vscode.Uri[]> {
     const rootToUris = new Map<string, vscode.Uri[]>();
     for (const uri of uris) {
@@ -47,17 +60,25 @@ export function performIgnoreOperation(
 
         let lines = originalContent.split("\n").map((l) => l.trim()).filter((l) => l !== "");
 
+        const isInverse = lines.includes('*');
+
         for (const uri of uris) {
-            const relRaw = path.relative(root, uri.fsPath);
-            const rel = relRaw.replace(/\\/g, "/");
+            const rel = getRelativePath(root, uri.fsPath);
             if (remove) {
-                const indexToRemove = lines.findIndex(l => l.trim() === rel);
-                if (indexToRemove !== -1) {
-                    const isAlways = indexToRemove > 0 && lines[indexToRemove - 1].trim().endsWith(ALWAYS_IGNORE_MARKER);
-                    if (isAlways) {
-                        vscode.window.showInformationMessage(`"${rel}" is permanently ignored. Use the dedicated command to remove it.`);
-                    } else {
-                        lines.splice(indexToRemove, 1);
+                if (isInverse) {
+                    const unignoreEntry = `!${rel}`;
+                    if (!lines.some(l => l.trim() === unignoreEntry)) {
+                        lines.push(unignoreEntry);
+                    }
+                } else {
+                    const indexToRemove = lines.findIndex(l => l.trim() === rel);
+                    if (indexToRemove !== -1) {
+                        const isAlways = indexToRemove > 0 && lines[indexToRemove - 1].trim().endsWith(ALWAYS_IGNORE_MARKER);
+                        if (isAlways) {
+                            vscode.window.showInformationMessage(`"${rel}" is permanently ignored. Use the dedicated command to remove it.`);
+                        } else {
+                            lines.splice(indexToRemove, 1);
+                        }
                     }
                 }
             } else if (!lines.some(l => l.trim() === rel)) {
@@ -108,14 +129,13 @@ export function performInverseIgnoreOperation(
         
         const lines: string[] = [...alwaysIgnoreBlocks, "*"];
         for (const uri of uris) {
-            const relRaw = path.relative(root, uri.fsPath);
-            let rel = relRaw.replace(/\\/g, "/");
+            const rel = getRelativePath(root, uri.fsPath);
 
             // Un-ignore all parent directories
-            const parts = rel.split('/');
+            const parts = rel.endsWith('/') ? rel.slice(0, -1).split('/') : rel.split('/');
             if (parts.length > 1) {
                 for (let i = 1; i < parts.length; i++) {
-                    const parentPath = `!${parts.slice(0, i).join('/')}`;
+                    const parentPath = `!${parts.slice(0, i).join('/')}/`;
                     if (!lines.includes(parentPath)) {
                         lines.push(parentPath);
                     }
@@ -159,8 +179,7 @@ export function removeAlwaysIgnoreEntry(
         let lines: string[] = fs.readFileSync(ignorePath, "utf8").split("\n");
 
         for (const uri of uris) {
-            const relRaw = path.relative(root, uri.fsPath);
-            const rel = relRaw.replace(/\\/g, "/");
+            const rel = getRelativePath(root, uri.fsPath);
 
             const indexToRemove = lines.findIndex(l => l.trim() === rel);
 
@@ -198,8 +217,7 @@ export function addAlwaysIgnoreEntry(
         }
 
         for (const uri of uris) {
-            const relRaw = path.relative(root, uri.fsPath);
-            const rel = relRaw.replace(/\\/g, "/");
+            const rel = getRelativePath(root, uri.fsPath);
             
             let foundIndex = -1;
             for (let i = 0; i < lines.length; i++) {
