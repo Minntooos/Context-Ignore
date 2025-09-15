@@ -5,16 +5,17 @@ import { IgnoreOperation } from "./state";
 import { ALWAYS_IGNORE_MARKER } from "./constants";
 
 function addUnignoreEntries(lines: string[], rel: string): void {
-    const parts = rel.endsWith("/") ? rel.slice(0, -1).split("/") : rel.split("/");
+    const cleanRel = rel.endsWith("/") ? rel.slice(0, -1) : rel;
+    const parts = cleanRel.split("/");
     if (parts.length > 1) {
         for (let i = 1; i < parts.length; i++) {
-            const parentPath = `!${parts.slice(0, i).join("/")}/`;
+            const parentPath = `!${parts.slice(0, i).join("/")}`;
             if (!lines.includes(parentPath)) {
                 lines.push(parentPath);
             }
         }
     }
-    const selfPath = `!${rel}`;
+    const selfPath = `!${cleanRel}`;
     if (!lines.includes(selfPath)) {
         lines.push(selfPath);
     }
